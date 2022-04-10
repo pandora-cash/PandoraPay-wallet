@@ -5,11 +5,13 @@
 
             <div class="center">
 
-                <img :src="require('src/assets/pandora-pay-logo-square.png').default" class="logo" >
+                <img :src="require(`src/assets/pandora-pay-logo-square${dark ? '-inv':''}.png`).default" class="logo" >
 
-                <svg width="200px" height="200px" viewBox="0 0 33 33">
-                    <polygon class="triangle" fill="none" stroke="#fff" stroke-width="1" points="16,1 32,32 1,32" />
-                </svg>
+                <div style="text-align: center;">
+                  <svg width="200px" height="200px" viewBox="0 0 33 33">
+                      <polygon class="triangle" fill="none" stroke="#fff" stroke-width="1" points="16,1 32,32 1,32" />
+                  </svg>
+                </div>
 
                 <h1>{{name.toUpperCase()}}</h1>
 
@@ -42,6 +44,7 @@ export default {
             progressStatus: "Initialized",
             isDownloading: false,
             error: "",
+            dark: false,
         }
     },
 
@@ -58,8 +61,10 @@ export default {
         if (typeof localStorage !== "undefined" && !localStorage.getItem('dark') )
             localStorage.setItem('dark', 'true')
 
-        if (typeof localStorage !== "undefined" && localStorage.getItem('dark') === 'true')
-            document.getElementsByTagName("html")[0].classList.add('dark');
+        if (typeof localStorage !== "undefined" && localStorage.getItem('dark') === 'true') {
+          document.getElementsByTagName("html")[0].classList.add('dark');
+          this.dark = true
+        }
 
         const formatLoadedSize = function (loaded, total){
             return `${( Math.min(loaded, total) / 1024 / 1024 ).toFixed(2)}mb / ${( total / 1024 / 1024).toFixed(2)}mb`
@@ -74,7 +79,7 @@ export default {
             }, async ()=>{
 
                 await PandoraPay.helpers.helloPandora()
-                this.progressStatus = "PandoraPay WASM is working!"
+                this.progressStatus = "WASM is working!"
                 PandoraPayWallet.loadWallet()
 
 
@@ -87,7 +92,7 @@ export default {
                     setTimeout(async ()=>{
 
                         const integrationHelper = new PandoraPayWebworkerIntegration("PandoraPayHelper", "wasm/PandoraPay-wallet-helper.wasm", "workers/PandoraPay-helper-webworker.js", (status)=>{
-                            console.log("PandoraPayHelper status:", status)
+                            console.log("Helper status:", status)
                         }, async ()=>{
 
                             let promiseDecoderResolve, promiseDecoderReject
@@ -97,7 +102,7 @@ export default {
                             })
 
                             await PandoraPayHelper.helloPandoraHelper()
-                            console.log("PandoraPayHelper WASM is working")
+                            console.log("Helper WASM is working")
 
                             resolver(true)
 
@@ -142,7 +147,7 @@ export default {
 
             this.progressStatus = "WASM serializing...";
             const data = await r.arrayBuffer()
-            this.progressStatus = "PandoraPay WASM instantiating...";
+            this.progressStatus = "WASM instantiating...";
 
             integration.createWorker()
             integration.initialize(data)
@@ -170,8 +175,8 @@ export default {
     .logo{
         max-width: 60px;
         position: absolute;
-        margin-top: 95px;
-        margin-left: 65px;
+        margin-top: 99px;
+        margin-left: 84px;
     }
 
     .dark .logo{
