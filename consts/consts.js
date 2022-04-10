@@ -1,8 +1,8 @@
 export default {
 
-    name: "PandoraPay",
-    title: 'PandoraPay',
-    entity: 'PandoraPay',
+    name: "pandora cash",
+    title: 'pandora cash',
+    entity: 'pandora cash',
     website: 'https://pandorapay.org/',
 
     assetsInfoPagination: 10,
@@ -12,8 +12,7 @@ export default {
 
     goArgv: [
         'js',
-        '--network=devnet',
-        '--new-devnet',
+        '--network=mainet',
         '--consensus=wallet',
         '--tcp-max-clients=1'
     ],

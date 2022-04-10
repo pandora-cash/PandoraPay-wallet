@@ -1,3 +1,17 @@
+# pandora cash wallet
+
+pandora cash wallet is a fork of PandoraPay wallet. 
+
+Minor changes
+```
+logo
+network
+naming
+```
+
+xiangwei
+
+
 # PandoraPay wallet
 
 PandoraPay wallet using Vue3. No SSR supported as it is intended to be a Single Page Application for Client usage.
