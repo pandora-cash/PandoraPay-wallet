@@ -9,7 +9,7 @@
 
                 <div style="text-align: center;">
                   <svg width="200px" height="200px" viewBox="0 0 33 33">
-                    <polygon class="triangle" fill="none" stroke="#fff" stroke-width="1" points="16,1 32,32 1,32" />
+                      <polygon class="triangle" fill="none" stroke="#fff" stroke-width="1" points="16,1 32,32 1,32" />
                   </svg>
                 </div>
 

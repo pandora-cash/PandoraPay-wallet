@@ -3,7 +3,7 @@ export default {
     name: "pandora cash",
     title: 'pandora cash',
     entity: 'pandora cash',
-    website: 'https://pandorapay.org/',
+    website: 'https://pandoracash.com/',
 
     assetsInfoPagination: 10,
     blocksInfoPagination: 10,
@@ -12,7 +12,7 @@ export default {
 
     goArgv: [
         'js',
-        '--network=mainet',
+        '--network=mainnet',
         '--consensus=wallet',
         '--tcp-max-clients=1'
     ],
