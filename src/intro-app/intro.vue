@@ -5,7 +5,7 @@
 
             <div class="center">
 
-                <img :src="require('src/assets/pandora-pay-logo-square.png').default" class="logo" :alt="name" >
+                <img :src="require(`src/assets/pandora-pay-logo-square${dark ? '-inv':''}.png`).default" class="logo" >
 
                 <div style="text-align: center;">
                   <svg width="200px" height="200px" viewBox="0 0 33 33">
@@ -175,8 +175,8 @@ export default {
     .logo{
         max-width: 60px;
         position: absolute;
-        margin-top: 95px;
-        margin-left: 70px;
+        margin-top: 99px;
+        margin-left: 84px;
     }
 
     .dark .logo{
