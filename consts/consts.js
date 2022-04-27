@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 
     name: "pandora cash",
     title: 'pandora cash',
