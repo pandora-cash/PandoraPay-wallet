@@ -20,8 +20,8 @@ module.exports = (env, argv) => {
         plugins: [
             new HtmlWebpackPlugin({
                 hash: true,
-                title: "PandoraPay",
-                description: "PandoraPay",
+                title: "Pandora Cash - King of Anonymity",
+                description: "Pandora Cash is secure, fungible and anonymous electronic cash",
                 template:  path.resolve(__dirname + '/../src/index.hbs'),
                 filename: path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/index.html`) //relative to root of the application
             }),
