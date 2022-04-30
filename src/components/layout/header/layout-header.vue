@@ -8,11 +8,11 @@
          </span>
     </button>
 
-        <router-link class="navbar-brand me-1 me-sm-3" to="/">
-            <div class="d-flex align-items-center">
-              <img class="me-2" :src="require(`src/assets/pandora-pay-logo-square${$store.state.settings.dark ? '-inv':''}.png`).default" :alt="title" width="40">
-            </div>
-        </router-link>
+    <router-link class="navbar-brand me-1 me-sm-3" to="/">
+      <div class="d-flex align-items-center">
+        <img class="me-2" :src="require(`src/assets/logo-square${$store.state.settings.dark?'':''}.png`).default" :alt="title" width="40">
+      </div>
+    </router-link>
 
     <div class="menu-right">
 
