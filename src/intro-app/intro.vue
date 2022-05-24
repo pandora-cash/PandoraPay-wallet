@@ -5,7 +5,7 @@
 
             <div class="center">
 
-                <img :src="require(`src/assets/logo-square${dark?'':''}.png`).default" class="logo" :alt="name" >
+                <img :src="require(`src/assets/logo-square${dark?'-inv':''}.png`).default" class="logo" :alt="name" >
 
                 <div style="text-align: center;">
                   <svg width="200px" height="200px" viewBox="0 0 33 33">
