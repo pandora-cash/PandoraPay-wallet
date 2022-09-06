@@ -1,25 +1,22 @@
 {
-  "name": "PandoraPay-Wallet",
+  "name": "pandorapay-wallet",
   "keywords": [
     "PandoraPay",
     "Wallet",
     "DEX"
   ],
   "scripts": {
-    "build-wallet": "webpack --config build/webpack-wallet.config.js --mode=production",
-    "build-wallet-analyzer": "webpack --config build/webpack-wallet.config.js --mode=production --analyzer",
-    "build-pandorapay-webworker": "webpack --config build/webpack-webworker.config.js --mode=production ",
-    "build-pandorapay-helper-webworker": "webpack --config build/webpack-helper-webworker.config.js --mode=production ",
-    "build": "npm run build-wallet && npm run build-pandorapay-webworker && npm run build-pandorapay-helper-webworker",
-    "test": "npm run build-wallet",
-    "dev": "webpack-dev-server --config=./build/webpack-wallet-hot-loader.config.js --hot --host 0.0.0.0"
+    "build-ui": "webpack --config build/webpack-ui-config.js",
+    "build-ui-analyzer": "webpack --config build/webpack-ui-config.js --mode=production --analyzer",
+    "build-webworker-wasm": "webpack --config build/webpack-webworker-wasm-config.js",
+    "build": "npm run build-webworker-wasm -- --mode=production && npm run build-ui -- --mode=production",
+    "test": "npm run build-ui",
+    "dev": "npm run build-webworker-wasm && webpack-dev-server --config=./build/webpack-ui-dev-server-config.js --hot --host 0.0.0.0"
   },
   "dependencies": {
-    "@hcaptcha/vue3-hcaptcha": "^1.0.1",
     "buffer": "^6.0.3",
     "decimal.js": "^10.3.1",
     "file-saver": "^2.0.5",
-    "html-webpack-plugin": "^5.5.0",
     "i": "^0.3.7",
     "localforage": "^1.9.0",
     "node-fetch": "^3.0.0",
@@ -56,6 +53,9 @@
     "webpack-dev-middleware": "^5.3.1",
     "webpack-dev-server": "^4.7.4",
     "webpack-hot-middleware": "~2.25.1",
-    "webpack-merge": "~5.8.0"
+    "webpack-merge": "~5.8.0",
+    "webpack-subresource-integrity": "^5.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-tags-plugin": "^3.0.2"
   }
 }

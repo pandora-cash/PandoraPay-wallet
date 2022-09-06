@@ -1,18 +1,12 @@
 const path = require('path')
-const webpack = require('webpack');
-const base = require('./webpack-wallet-base.config');
+const base = require('./webpack-ui-base-config');
 const { merge } = require('webpack-merge');
 
 module.exports = (env, argv) => merge( base(env, argv), {
 
-
     entry: [
         'webpack-hot-middleware/client',
-        './src/main.js'
     ],
-
-    output: {
-    },
 
     devServer: {
         historyApiFallback: true,
@@ -23,9 +17,7 @@ module.exports = (env, argv) => merge( base(env, argv), {
     },
 
     plugins: [
-        new webpack.DefinePlugin({
-            DEV_SERVER: 'true'
-        }),
+
     ]
 
 });

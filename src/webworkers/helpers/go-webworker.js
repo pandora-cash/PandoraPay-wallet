@@ -1,37 +1,64 @@
-require('./wasm_exec.js')
+require('../dist/wasm_exec.js')
 
 const Helper = require("../helpers/helper");
-self.onmessage = async function(event) {
+const PandoraStorage = require("./storage/pandora-storage");
 
-    if (event.type === "message"){
+module.exports = function (){
 
-        const data = event.data
+    self.onmessage = async function(event) {
 
-        if (data.type === "initialize"){
+        if (event.type === "message"){
 
-            self.postMessage({ type: "initialize-answer",  status: "WebWorker initializing...", })
+            const data = Helper.FixObject( self, event.data )
 
-            const go = new Go();
-            go.argv = data.goArgv
+            let steps = 0
+            let stepsTotal = 5
 
-            self.postMessage({ type: "initialize-answer", status: "WASM creating...", })
+            if (data.type === "initialize"){
 
-            const result = await WebAssembly.instantiate( data.data, go.importObject)
+                self.postMessage({ type: "initialize-answer",  status: `${Math.floor(steps/stepsTotal*100)}% WebWorker initializing...`, })
+                steps++
 
-            self.postMessage({ type: "initialize-answer", status: "WASM executing...", })
+                //here we can initialise various libraries used by different wasm modules.
+                if (data.name === "PandoraPay"){
+                    PandoraStorage.exportStorage()
+                }
+                self.postMessage({ type: "initialize-answer",  status: `${Math.floor(steps/stepsTotal*100)}% WebWorker libraries initialised...`, })
+                steps++
 
-            go.run(result.instance)
+                global.WASMLoaded = ()=>{
+                    const transferable = []
+                    const clone = Helper.ProcessObject( global[data.name], transferable )
 
-            self.postMessage({ type: "initialize-answer", status: "WASM executed", })
+                    self.postMessage({ type: "initialize-done", clone, }, transferable)
+                    steps++
+                }
 
-            const transferable = []
-            const PandoraPayClone = Helper.ProcessObject( PandoraPay, transferable )
+                const go = new Go();
+                go.argv = data.goArgv
 
-            self.postMessage({ type: "initialize-done", PandoraPayClone, }, transferable)
+                self.postMessage({ type: "initialize-answer", status: `${Math.floor(steps/stepsTotal*100)}% WASM creating...`, })
+                steps++
 
+                const result = await WebAssembly.instantiate( data.data, go.importObject)
+
+                self.postMessage({ type: "initialize-answer", status: `${Math.floor(steps/stepsTotal*100)}% WASM executing...`, })
+                steps++
+
+                go.run(result.instance).catch( e => {
+                    self.postMessage({ type: "initialize-answer", status: `WASM execution raised an error ${e.toString()}`, })
+                })
+
+                self.postMessage({ type: "initialize-answer", status: `${Math.floor(steps/stepsTotal*100)}% WASM executed`, })
+                steps++
+
+
+
+            }
+
+            return Helper.OnMessage(self, data, false )
         }
 
-        return Helper.OnMessage(self, data)
     }
 
 }

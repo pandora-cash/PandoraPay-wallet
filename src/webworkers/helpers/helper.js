@@ -1,6 +1,6 @@
 const Callbacks = {}
 
-async function OnMessage(worker, data ){
+async function OnMessage(worker, data, isMainThread = false ){
 
     if (data.type === "callback"){
 
@@ -8,13 +8,14 @@ async function OnMessage(worker, data ){
 
         //console.log("OnMessage1", cb, data.arguments, typeof data.arguments )
 
-        const transferable = []
-        let out = ProcessObject( data.arguments, transferable )
-        out = FixObject(worker, out )
+        let out = data.arguments
 
         //console.log("OnMessage2", cb, data.arguments, out )
 
-        let result, err
+        let result
+
+        if (isMainThread)
+            out = FixObject(worker, out )
 
         try{
             if (data.isArray)
