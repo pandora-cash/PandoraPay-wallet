@@ -79,7 +79,7 @@
                         </template>
                         <template v-if="payload.dataVersion.eq( PandoraPay.enums.transactions.TransactionDataVersion.TX_DATA_ENCRYPTED)">
                             <span v-if="!decrypted || !decrypted.zetherTx.payloads[index]" v-tooltip.bottom="`Encrypted Memo`">?</span>
-                            <span v-else v-tooltip.bottom="`${Buffer.from(decrypted.zetherTx.payloads[index].message, 'base64').toString()}`">{{Buffer.from(decrypted.zetherTx.payloads[index].message, "base64").toString()}}</span>
+                            <span v-else v-tooltip.bottom="`String: ${$store.getters.printEncryptedTxMemo(decrypted.zetherTx.payloads[index].message)} || Base64: ${decrypted.zetherTx.payloads[index].message}`">{{$store.getters.printEncryptedTxMemo(decrypted.zetherTx.payloads[index].message)}}</span>
                         </template>
                     </div>
                 </template>
@@ -87,17 +87,15 @@
 
             <span class="col-4 d-block d-md-none text-dark text-truncate">Amount</span>
             <div class="col-8 col-md-2 text-truncate">
-                <template v-if="tx.version.eq( PandoraPay.enums.transactions.TransactionVersion.TX_ZETHER )">
-                    <div class="">
-                        <loading-button v-if="canDecrypt && !decrypted" type="button" tooltip="Decrypt the transaction to see the amount, shared text and recipient" @submit="decryptTx" text="Decrypt" icon="fas fa-unlock" :icon-left="false" class-custom="badge rounded-pill bg-info" component="span" />
-                        <div v-else v-for="(payload, index) in tx.base.payloads" :key="`tx_payload_${index}`" class="col-12 text-truncate d-md-flex justify-content-center align-items-center">
-                            <span v-if="!decrypted || !decrypted.zetherTx.payloads[index]" v-tooltip.bottom="`Confidential amount`">?</span>
-                            <amount v-else-if="decrypted.zetherTx.payloads[index].whisperSenderValid" :value="decrypted.zetherTx.payloads[index].sentAmount" :sign="false" value-class="text-danger" />
-                            <amount v-else-if="decrypted.zetherTx.payloads[index].whisperRecipientValid" :value="decrypted.zetherTx.payloads[index].receivedAmount" :sign="true" value-class="text-success" :show-plus-sign="true" />
-                            <amount v-else v-tooltip.bottom="`You received zero`" :value="new Decimal(0)" :sign="true"/>
-                        </div>
+                <div v-if="tx.version.eq( PandoraPay.enums.transactions.TransactionVersion.TX_ZETHER )">
+                    <loading-button v-if="canDecrypt && !decrypted" type="button" tooltip="Decrypt the transaction to see the amount, shared text and recipient" @submit="decryptTx" text="Decrypt" icon="fas fa-unlock" :icon-left="false" class-custom="badge rounded-pill bg-info" component="span" />
+                    <div v-else v-for="(payload, index) in tx.base.payloads" :key="`tx_payload_${index}`" class="col-12 text-truncate d-md-flex justify-content-center align-items-center">
+                        <span v-if="!decrypted || !decrypted.zetherTx.payloads[index]" v-tooltip.bottom="`Confidential amount`">?</span>
+                        <amount v-else-if="decrypted.zetherTx.payloads[index].whisperSenderValid" :value="decrypted.zetherTx.payloads[index].sentAmount" :sign="false" value-class="text-danger" />
+                        <amount v-else-if="decrypted.zetherTx.payloads[index].whisperRecipientValid" :value="decrypted.zetherTx.payloads[index].receivedAmount" :sign="true" value-class="text-success" :show-plus-sign="true" />
+                        <amount v-else v-tooltip.bottom="`You received zero`" :value="new Decimal(0)" :sign="true"/>
                     </div>
-                </template>
+                </div>
             </div>
 
             <span class="col-4 d-block d-md-none text-dark text-truncate">Recipient</span>
@@ -116,13 +114,11 @@
 </template>
 
 <script>
-import StringHelper from "src/utils/string-helper";
 import LoadingSpinner from "src/components/utils/loading-spinner";
 import ShowTransactionPreviewData from "./show-transaction-preview-data"
 import Amount from "src/components/wallet/amount"
 import LoadingButton from "src/components/utils/loading-button";
 import AccountIdenticon from "../../wallet/account/account-identicon";
-import Decimal from "decimal.js";
 export default {
 
     components: { LoadingSpinner, ShowTransactionPreviewData, Amount, LoadingButton, AccountIdenticon},
@@ -139,9 +135,6 @@ export default {
     },
 
     computed:{
-        PandoraPay: () => PandoraPay,
-        Buffer: () => Buffer,
-        Decimal: () => Decimal,
 
         tx(){
             return this.$store.state.transactionsPreview.txsByHash[this.txHash]

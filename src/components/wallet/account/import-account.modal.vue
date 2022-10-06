@@ -9,7 +9,8 @@
                 1: {icon: 'fas fa-wallet', name: 'Account', tooltip: 'Preview account' },
                 2: {icon: 'fas fa-lock', name: 'Decrypt', tooltip: 'Decrypt file' },
                 3: {icon: 'fas fa-check', name: 'Done', tooltip: 'Finish importing account' } }"
-                     @onSetTab="setTab" controls-class-name="modal-footer bg-light" :buttons="buttons" :allow-scroll="false" >
+                     @onSetTab="setTab" controls-class-name="modal-footer bg-light" :allow-scroll="false"
+                     :buttons="{ 1: { icon: 'fas fa-file-upload', text: 'Import Account' }}">
 
                 <template v-slot:tab_0>
                     <div>
@@ -68,10 +69,6 @@ export default {
             return false;
         },
 
-        buttons(){
-            return { 1: { icon: 'fas fa-file-upload', text: 'Import Account' }}
-        }
-
     },
 
     methods:{
@@ -85,10 +82,9 @@ export default {
                 if (oldTab === 1 && value === 2)
                     await this.handleProcess()
 
+                resolve(true)
             }catch(err) {
                 reject(err)
-            }finally{
-                resolve(true)
             }
         },
 
