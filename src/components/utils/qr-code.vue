@@ -30,7 +30,7 @@ export default {
     data(){
         return {
             img: "",
-            logo: require(`src/assets/logo-square-inv-64x64.png`).default,
+            logo: require(`src/assets/logo-square-64x64.png`).default,
             loaded: false,
             options: {
                 data: this.data,
@@ -76,10 +76,6 @@ export default {
         -moz-border-radius: 15px;
         -webkit-border-radius: 15px;
         display: inline-block;
-    }
-
-    .qr img {
-        width: 100%;
     }
 
 </style>
