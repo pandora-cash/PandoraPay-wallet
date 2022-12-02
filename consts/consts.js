@@ -13,7 +13,7 @@ module.exports = {
     goArgv: [
         'js',
         '--network=mainnet',
-        '--consensus=wallet',
+        '--node-consensus=app',
         '--tcp-max-clients=1'
     ],
 
