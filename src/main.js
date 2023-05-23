@@ -53,8 +53,7 @@ class Main {
 
         options.setup = {
             appId: "#wallet",
-            enabled: true,
-            skip: false,
+            enabled: false,
             ...(options.setup||{})
         }
 
