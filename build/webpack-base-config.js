@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
     const isProd = argv.mode === "production"
     const isAnalyze = process.argv.includes('--analyzer');
     const isDevServer = process.env.WEBPACK_DEV_SERVER
+    const skipZip = process.argv.includes('--skip-zip');
 
     console.log("isProd", isProd)
 
@@ -102,13 +103,13 @@ module.exports = (env, argv) => {
             ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
             ... ( isProd ? [
                         new TerserPlugin(),
-                        new CompressionWebpackPlugin({
+                        ...( skipZip ? []: [ new CompressionWebpackPlugin({
                             filename: '[path][base].gz',
                             algorithm: 'gzip',
                             test: new RegExp('\\.(js|css)$'),
                             threshold:10240,
                             minRatio: 0.8,
-                        }),
+                        })]),
                     ]
                     : [
                         new FriendlyErrorsWebpackPlugin(),
