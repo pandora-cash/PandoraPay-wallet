@@ -73,7 +73,7 @@ export default {
 
             return str2
         } catch (e) {
-            console.log(e)
+            console.error("Error formatting money", e.toString() )
         }
     },
 
