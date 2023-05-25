@@ -1,12 +1,11 @@
 import * as Vue from 'vue'
-import Intro from './intro';
-
+import Setup from './setup';
 
 export default (options) => {
 
-    const app = window.PandoraPayWalletIntro = Vue.createApp({
+    const app = window.PandoraPayWalletSetup = Vue.createApp({
         render() {
-            return Vue.h( Intro, {
+            return Vue.h(Setup, {
                 options,
             });
         }
