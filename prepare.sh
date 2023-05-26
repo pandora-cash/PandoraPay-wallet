@@ -1,12 +1,17 @@
+dir="../go-pandora-pay"
+name="PandoraPay-wallet"
+
 #copy wasm_exec.js
 
-location=$(which go);
-echo $location
+mkdir -p "./src/webworkers/dist"
+cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" "./src/webworkers/dist"
 
-path=$(dirname "$location");
-path=$(dirname "$path");
+# build wasm
 
-echo $path
+(cd ${dir} && ./scripts/build-wasm.sh main dev )
+(cd ${dir} && ./scripts/build-wasm.sh helper dev )
 
-mkdir ./src/webworkers/dist
-cp $path/misc/wasm/wasm_exec.js ./src/webworkers/dist
+# copy wasm to dist/dev
+
+cp ${dir}/bin/wasm/pandora-helper-dev.wasm ./dist/dev/wasm/${name}-helper.wasm
+cp ${dir}/bin/wasm/pandora-main-dev.wasm ./dist/dev/wasm/${name}-main.wasm
