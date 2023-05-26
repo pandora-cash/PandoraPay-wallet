@@ -1,0 +1,53 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x        
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19        
+        
+    - name: Prepare Wasm Build
+      run: |
+        cd..
+        git clone https://github.com/pandora-cash/go-pandora-pay
+        cd go-pandora-pay
+        go get -t .
+        
+    - name: Install dependencies
+      run: |
+        cd PandoraPay-wallet
+        npm install
+        ./prepare.sh
+        ./build.sh        
+        cd ./dist
+        zip -r build.zip build
+        
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |            
+           build.zip
