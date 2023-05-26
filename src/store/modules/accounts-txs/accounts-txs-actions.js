@@ -24,7 +24,7 @@ export default {
                 if (!accountTxs || !accountTxs.count)
                     return resolve(accountTxs)
 
-                console.log("next", next ? next.toString() : null, accountTxs )
+                console.log("next", next ? next.toString() : null, JSONStringify(accountTxs) )
 
                 if (!view){
                     starting = Decimal.max(0, accountTxs.count.minus( consts.addressTxsPagination ) )

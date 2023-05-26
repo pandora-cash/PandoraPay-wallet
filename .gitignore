@@ -1,3 +1,5 @@
+src/webworkers/dist/
+
 # Logs
 logs
 *.log

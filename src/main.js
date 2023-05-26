@@ -43,6 +43,7 @@ class Main {
 
         if (!options.router) options.router = {}
         if (typeof options.resPrefix === "undefined") options.resPrefix = '/'
+        if (typeof options.compression === "undefined") options.compression = ""
 
         options.wallet = {
             appId: '#wallet',
@@ -50,8 +51,14 @@ class Main {
             ...(options.wallet||{}),
         }
 
+        options.setup = {
+            appId: "#wallet",
+            enabled: false,
+            ...(options.setup||{})
+        }
+
         options.intro = {
-            appId: '#wallet-loading',
+            appId: '#wallet',
             startAutomatically: true,
             defaultTheme: 'true',
             loadWasmHelper: true,
@@ -69,19 +76,24 @@ class Main {
     }
 
     async start(){
-        const introAppVue = require('./intro-app/intro-app').default;
-        this.introAppVue = introAppVue(this.options);
+        if (this.options.setup.enabled )
+            this.setupAppVue = require('./setup-app/setup-app').default(this.options);
+        else
+            return this.showIntro()
+    }
+
+    async showIntro(){
+        this.introAppVue = require('./intro-app/intro-app').default(this.options);
     }
 
     async loadApp(){
 
         if (this.introAppVue) {
             this.introAppVue.unmount()
-            document.getElementById(this.options.intro.appId.slice(1)).remove()
+            document.getElementById(this.options.intro.appId.slice(1)).textContent = ""
         }
 
-        const mainVue = require('./app/main-vue').default;
-        this.walletAppVue = await mainVue(this.options);
+        this.walletAppVue = await require('./app/main-vue').default(this.options);
     }
 
 }

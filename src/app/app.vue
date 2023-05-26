@@ -67,7 +67,7 @@ export default {
         if (data instanceof ArrayBuffer) data = new Uint8Array(data)
         if (data instanceof Uint8Array) data = MyTextDecode(data)
 
-        console.log("JS NAME:", name, "data", data)
+        //console.log("JS NAME:", name, "data", data)
 
         if (name === "main")
           if (data === "initialized") {
@@ -78,7 +78,7 @@ export default {
               if (extraInfo) extraInfo = MyTextDecode(extraInfo)
               if (data) data = MyTextDecode(data)
 
-              console.log("listenNetworkNotifications", subscriptionType, key, data, extraInfo)
+              //console.log("listenNetworkNotifications", subscriptionType, key, data, extraInfo)
 
               if (subscriptionType === PandoraPay.enums.api.websockets.subscriptionType.SUBSCRIPTION_ACCOUNT || subscriptionType === PandoraPay.enums.api.websockets.subscriptionType.SUBSCRIPTION_PLAIN_ACCOUNT || subscriptionType === PandoraPay.enums.api.websockets.subscriptionType.SUBSCRIPTION_REGISTRATION)
                 return this.$store.dispatch('accountUpdateNotification', {

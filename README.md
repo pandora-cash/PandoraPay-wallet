@@ -19,6 +19,32 @@ PandoraPay wallet using Vue3. No SSR supported as it is intended to be a Single 
 ## Compute Resource Hashes
 https://www.srihash.org/
 
+## Installation
+
+1. run `npm install`
+2. run `./prepare.sh`
+
+## Development
+
+### compile wasm dev mode
+
+1. `cd ../go-pandora-pay`
+2. run `./scripts/build-wasm.sh main dev`
+3. run `./scripts/build-wasm.sh helper dev`
+
+### run webpack dev server 
+3. run `npm run dev`
+
+## Production
+
+### compile wasm prod mode
+1. cd `./go-pandora-pay`
+2. run `./scripts/build-wasm.sh main build brotli zopfli`
+3. run `./scripts/build-wasm.sh helper build brotli zopfli`
+
+### build wallet
+1. run `npm run build`
+
 ## DOCS
 
 [NGINX Setup](/wiki/nginx.md)

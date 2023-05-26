@@ -140,6 +140,7 @@ export default {
       }
 
       if (oldTab === 1 && value > oldTab) {
+        if (this.fee.feeAuto.validationError) throw this.fee.feeAuto.validationError
         if (this.fee.feeManual.validationError) throw this.fee.feeManual.validationError
 
         await this.handeTxProcess()
