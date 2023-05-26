@@ -16,12 +16,12 @@
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="connect-tor" value="tor" v-model="connectionProxyType">
-                <label class="form-label" for="connect-tor">Connect using Tor</label>
+                <label class="form-label" for="connect-tor">Connect using Tor daemon</label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="connect-i2p" value="i2p" v-model="connectionProxyType">
-                <label class="form-label" for="connect-i2p">Connect using I2P</label>
+                <label class="form-label" for="connect-i2p">Connect using I2P daemon</label>
               </div>
 
               <div class="form-check">
