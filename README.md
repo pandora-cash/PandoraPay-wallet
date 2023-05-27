@@ -21,8 +21,8 @@ https://www.srihash.org/
 
 ## Installation
 
-1. run `npm install`
-2. run `bash prepare.sh`
+1. `npm install`
+2. `bash prepare.sh`
 
 ## Development
 
@@ -31,12 +31,12 @@ https://www.srihash.org/
 1. `bash prepare.sh`
 
 ### run webpack dev server 
-2. run `npm run dev`
+2. `npm run dev`
 
 ## Production
 
 ### compile wasm prod mode
-1. cd `bash build.sh`
+1. `bash build.sh`
 
 ## DOCS
 
