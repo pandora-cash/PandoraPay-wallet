@@ -29,7 +29,7 @@ jobs:
         
     - name: Prepare Wasm Build
       run: |
-        cd..
+        cd ..
         git clone https://github.com/pandora-cash/go-pandora-pay
         cd go-pandora-pay
         go get -t .
