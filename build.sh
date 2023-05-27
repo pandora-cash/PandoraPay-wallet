@@ -46,6 +46,6 @@ if $helper ; then
 fi
 
 if [[ "$*" == *webpack* ]]; then
-    npm run build-ui ${compressionWebpack} -- --mode=production
     npm run build-webworker-wasm ${compressionWebpack} -- --mode=production
+    npm run build-ui ${compressionWebpack} -- --mode=production
 fi
