@@ -36,10 +36,7 @@ https://www.srihash.org/
 ## Production
 
 ### compile wasm prod mode
-1. `bash build.sh`
-
-### build front-end prod mode
-2. `npm run build`
+1. `bash build.sh build compression webpack`
 
 ## DOCS
 

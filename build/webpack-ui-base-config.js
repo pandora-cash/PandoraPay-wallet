@@ -14,13 +14,14 @@ function sha256(a){
     return crypto.createHash('sha256').update(a).digest('hex');
 }
 
-function sha256file(a){
-    const fileBuffer = fs.readFileSync(a)
-    return sha256(fileBuffer)
+function sha256file(path){
+    if (!fs.existsSync(path)) return sha256("")
+    return sha256(fs.readFileSync(path))
 }
 
-function getFilesizeInBytes(filename) {
-    return fs.statSync(filename).size;
+function getFilesizeInBytes(path) {
+    if (!fs.existsSync(path)) return 0
+    return fs.statSync(path).size;
 }
 
 module.exports = (env, argv) => {

@@ -25,9 +25,7 @@ jobs:
 
     - name: Download Artifact Wasm
       run: |
-        mkdir -p ./src/webworkers/dist
         
-        mkdir -p ./dist/build/wasm
         cd ./dist/build/wasm
         
         curl -L  -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://github.com/pandora-cash/go-pandora-pay/releases/download/latest/artifact-wasm.zip > artifact-wasm.zip 
