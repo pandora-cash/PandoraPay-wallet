@@ -10,7 +10,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build release development:
+  build-release-development:
 
     runs-on: ubuntu-latest
 
@@ -40,7 +40,7 @@ jobs:
         mkdir -p wasm
         cd wasm
         
-        curl https://github.com/pandora-cash/go-pandora-pay/releases/download/development/artifact-wasm.zip                      
+        curl -L  -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://github.com/pandora-cash/go-pandora-pay/releases/download/development/artifact-wasm.zip > artifact-wasm.zip 
         unzip artifact-wasm.zip
         
         cd ..
