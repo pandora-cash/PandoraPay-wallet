@@ -15,7 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout wallet
+      uses: actions/checkout@v3
+      with:
+          repository: pandora-cash/PandoraPay-wallet
+          path: PandoraPay-wallet
+          
+    - name: Checkout Blockchain
+      uses: actions/checkout@v3
+      with:
+          repository: pandora-cash/go-pandora-pay
+          path: go-pandora-pay          
     
     - name: Set up Node
       uses: actions/setup-node@v3
@@ -27,21 +37,22 @@ jobs:
       with:
         go-version: 1.19        
         
+    - name: Install libraries
+      run: sudo apt-get install -y brotli zopfli
+                
     - name: Prepare Wasm Build
-      run: |
-        cd ..
-        git clone https://github.com/pandora-cash/go-pandora-pay
-        cd go-pandora-pay
+      run: |   
         go get -t .
+      working-directory: ./go-pandora-pay
         
     - name: Install dependencies
       run: |
-        cd PandoraPay-wallet
         npm install
         ./prepare.sh
         ./build.sh        
         cd ./dist
         zip -r build.zip build
+      working-directory: ./PandoraPay-wallet
         
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
