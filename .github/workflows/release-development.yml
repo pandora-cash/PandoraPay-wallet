@@ -22,37 +22,33 @@ jobs:
     - name: Set up Node
       uses: actions/setup-node@v3
       with:
-        node-version: 18.x        
-
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.19
-
-    - name: Install dependencies
-      run: |
-        cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" "./src/webworkers/dist"
-        npm install
-        npm run build
+        node-version: 18.x
 
     - name: Download Artifact Wasm
       run: |
-        cd ./dist/build
-        mkdir -p wasm
-        cd wasm
+        mkdir -p ./src/webworkers/dist
+        
+        mkdir -p ./dist/build/wasm
+        cd ./dist/build/wasm
         
         curl -L  -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://github.com/pandora-cash/go-pandora-pay/releases/download/development/artifact-wasm.zip > artifact-wasm.zip 
         unzip artifact-wasm.zip
         
-        cd ..
-        cd ..
+        mv ./wasm_exec.js ../../../src/webworkers/dist/wasm_exec.js
+        
+        cd ../../
         zip -r wallet-build.zip build
+
+    - name: build npm
+      run: |
+        npm install
+        npm run build        
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "development"
-          prerelease: true
-          title: "Development Build"
-          files: |            
-           ./dist/wallet-build.zip
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "development"
+        prerelease: true
+        title: "Development Build"
+        files: |            
+         ./dist/wallet-build.zip
