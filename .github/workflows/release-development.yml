@@ -44,6 +44,7 @@ jobs:
         unzip artifact-wasm.zip
         
         cd ..
+        cd ..
         zip -r wallet-build.zip build
 
     - uses: "marvinpinto/action-automatic-releases@latest"
