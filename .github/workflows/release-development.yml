@@ -10,8 +10,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-release-development:
-
+  pre-release:
+    name: "Release Development"
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +33,7 @@ jobs:
       run: |
         cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" "./src/webworkers/dist"
         npm install
+        npm run build
 
     - name: Download Artifact Wasm
       run: |
