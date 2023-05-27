@@ -52,11 +52,11 @@ module.exports = (env, argv) => {
                 append: true
             }),
             new webpack.DefinePlugin({
-                SRI_WEB_WORKER_WASM: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/workers/PandoraPay-webworker-wasm.js`) )+"'" : "''",
-                SRI_WASM_MAIN: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/PandoraPay-wallet-main.wasm`) )+"'" : "''",
-                SIZE_WASM_MAIN: `${isProd ? getFilesizeInBytes( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/PandoraPay-wallet-main.wasm`) ) : "0"}`,
-                SRI_WASM_HELPER: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/PandoraPay-wallet-helper.wasm`) )+"'" : "''",
-                SIZE_WASM_HELPER: `${isProd ? getFilesizeInBytes( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/PandoraPay-wallet-helper.wasm`) ) : "0"}`,
+                SRI_WEB_WORKER_WASM: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/workers/pandora-webworker-wasm.js`) )+"'" : "''",
+                SRI_WASM_MAIN: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/pandora-main.wasm`) )+"'" : "''",
+                SIZE_WASM_MAIN: `${isProd ? getFilesizeInBytes( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/pandora-main.wasm`) ) : "0"}`,
+                SRI_WASM_HELPER: isProd ? "'"+sha256file( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/pandora-helper.wasm`) )+"'" : "''",
+                SIZE_WASM_HELPER: `${isProd ? getFilesizeInBytes( path.resolve(__dirname + `/../dist/${isProd ? 'build' : 'dev'}/wasm/pandora-helper.wasm`) ) : "0"}`,
             }),
         ],
     });

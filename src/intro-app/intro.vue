@@ -91,7 +91,7 @@ export default {
         const wasmMainSri = global.SRI_WASM_MAIN || ''
         const wasmMainFileSize = global.SIZE_WASM_MAIN || 0
 
-        const integration = new WasmWebworkerIntegration("PandoraPay", this.options.resPrefix + "wasm/PandoraPay-wallet-main.wasm?" + wasmMainSri, wasmMainSri, wasmMainFileSize, consts.goArgv, this.options.resPrefix + "workers/PandoraPay-webworker-wasm.js", (status) => {
+        const integration = new WasmWebworkerIntegration("PandoraPay", this.options.resPrefix + "wasm/pandora-main.wasm?" + wasmMainSri, wasmMainSri, wasmMainFileSize, consts.goArgv, this.options.resPrefix + "workers/pandora-webworker-wasm.js", (status) => {
           console.log("Main status:", status)
           this.progressStatus = status
         }, async () => {
@@ -114,7 +114,7 @@ export default {
                 const wasmHelperSri = global.SRI_WASM_HELPER || ''
                 const wasmHelperFileSize = global.SIZE_WASM_HELPER || 0
 
-                const integrationHelper = new WasmWebworkerIntegration("PandoraPayHelper", this.options.resPrefix + "wasm/PandoraPay-wallet-helper.wasm?" + wasmHelperSri, wasmHelperSri, wasmHelperFileSize, consts.goArgv, this.options.resPrefix + "workers/PandoraPay-webworker-wasm.js", (status) => {
+                const integrationHelper = new WasmWebworkerIntegration("PandoraPayHelper", this.options.resPrefix + "wasm/pandora-helper.wasm?" + wasmHelperSri, wasmHelperSri, wasmHelperFileSize, consts.goArgv, this.options.resPrefix + "workers/pandora-webworker-wasm.js", (status) => {
                   console.log("Helper status:", status)
                 }, async () => {
 

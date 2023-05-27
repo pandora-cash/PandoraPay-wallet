@@ -1,5 +1,5 @@
 dir="../go-pandora-pay"
-name="PandoraPay-wallet"
+name="pandora"
 mode="dev"
 compression=""
 compressionWebpack=" --skip-zip "
@@ -20,30 +20,28 @@ fi
 
 #copy wasm_exec.js
 
-cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" "./src/webworkers/dist"
-
 (cd ${dir} && ./scripts/build-wasm.sh main ${mode} ${compression} )
 
 # copy wasm to dist/build
 
-rm ./dist/${mode}/wasm/${name}-main.wasm* 2>/dev/null
-rm ./dist/${mode}/wasm/${name}-helper.wasm* 2>/dev/null
+find ./dist/${mode}/wasm/ -name "*.gz" -type f -delete
+find ./dist/${mode}/wasm/ -name "*.br" -type f -delete
 
-cp ${dir}/bin/wasm/pandora-main-${mode}.wasm ./dist/${mode}/wasm/${name}-main.wasm
+cp ${dir}/bin/wasm/${mode}/${name}-main.wasm ./dist/${mode}/wasm/${name}-main.wasm
 
 if [[ "$*" == *compression* ]]; then
-  cp ${dir}/bin/wasm/pandora-main-${mode}.wasm.gz ./dist/${mode}/wasm/${name}-main.wasm.gz 2>/dev/null
-  cp ${dir}/bin/wasm/pandora-main-${mode}.wasm.br ./dist/${mode}/wasm/${name}-main.wasm.br 2>/dev/null
+  cp ${dir}/bin/wasm/${mode}/${name}-main.wasm.gz ./dist/${mode}/wasm/${name}-main.wasm.gz 2>/dev/null
+  cp ${dir}/bin/wasm/${mode}/${name}-main.wasm.br ./dist/${mode}/wasm/${name}-main.wasm.br 2>/dev/null
 fi
 
 
 if $helper ; then
   (cd ${dir} && ./scripts/build-wasm.sh helper ${mode} ${compression} )
-  cp ${dir}/bin/wasm/pandora-helper-${mode}.wasm ./dist/${mode}/wasm/${name}-helper.wasm
+  cp ${dir}/bin/wasm/${mode}/${name}-helper.wasm ./dist/${mode}/wasm/${name}-helper.wasm
 
   if [[ "$*" == *compression* ]]; then
-    cp ${dir}/bin/wasm/pandora-helper-${mode}.wasm.gz ./dist/${mode}/wasm/${name}-helper.wasm.gz 2>/dev/null
-    cp ${dir}/bin/wasm/pandora-helper-${mode}.wasm.br ./dist/${mode}/wasm/${name}-helper.wasm.br 2>/dev/null
+    cp ${dir}/bin/wasm/${mode}/${name}-helper.wasm.gz ./dist/${mode}/wasm/${name}-helper.wasm.gz 2>/dev/null
+    cp ${dir}/bin/wasm/${mode}/${name}-helper.wasm.br ./dist/${mode}/wasm/${name}-helper.wasm.br 2>/dev/null
   fi
 fi
 

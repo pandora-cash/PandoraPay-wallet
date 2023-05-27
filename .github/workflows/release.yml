@@ -34,15 +34,6 @@ jobs:
         
         mv wasm_exec.js ../../../src/webworkers/dist/wasm_exec.js
         
-        # rename files
-        mv pandora-main-build.wasm PandoraPay-wallet-main.wasm
-        mv pandora-main-build.wasm.gz PandoraPay-wallet-main.wasm.gz
-        mv pandora-main-build.wasm.br PandoraPay-wallet-main.wasm.br
-        
-        mv pandora-helper-build.wasm PandoraPay-wallet-helper.wasm
-        mv pandora-helper-build.wasm.br PandoraPay-wallet-helper.wasm.br
-        mv pandora-helper-build.wasm.gz PandoraPay-wallet-helper.wasm.gz
-        
         cd ../../
         (cd build; zip -r ../wallet-build.zip *)
 

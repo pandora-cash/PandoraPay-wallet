@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
 
         output: {
             path: path.resolve(__dirname, `./../dist/${isProd ? 'build': 'dev'}/workers`),
-            filename: "PandoraPay-webworker-wasm.js"
+            filename: "pandora-webworker-wasm.js"
         },
 
     });
