@@ -14,6 +14,3 @@ cp ${dir}/bin/wasm/pandora-main-build.wasm ./dist/build/wasm/${name}-main.wasm
 cp ${dir}/bin/wasm/pandora-main-build.wasm.gz ./dist/build/wasm/${name}-main.wasm.gz
 cp ${dir}/bin/wasm/pandora-main-build.wasm.br ./dist/build/wasm/${name}-main.wasm.br
 
-# build production
-
-npm run build

@@ -38,6 +38,9 @@ https://www.srihash.org/
 ### compile wasm prod mode
 1. `bash build.sh`
 
+### build front-end prod mode
+2. `npm run build`
+
 ## DOCS
 
 [NGINX Setup](/wiki/nginx.md)
