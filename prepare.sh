@@ -6,6 +6,10 @@ name="PandoraPay-wallet"
 mkdir -p "./src/webworkers/dist"
 cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" "./src/webworkers/dist"
 
+mkdir -p ./dist/build/wasm
+mkdir -p ./dist/dev
+mkdir -p ./dist/dev/wasm
+
 # build wasm
 
 (cd ${dir} && ./scripts/build-wasm.sh main dev )
