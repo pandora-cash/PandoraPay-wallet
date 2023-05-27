@@ -32,11 +32,12 @@ jobs:
         
         curl -L  -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://github.com/pandora-cash/go-pandora-pay/releases/download/latest/artifact-wasm.zip > artifact-wasm.zip 
         unzip artifact-wasm.zip
+        rm artifact-wasm.zip
         
         mv ./wasm_exec.js ../../../src/webworkers/dist/wasm_exec.js
         
         cd ../../
-        zip -r wallet-build.zip build
+        (cd build; zip -r ../wallet-build.zip *)
 
     - name: build npm
       run: |
