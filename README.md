@@ -22,28 +22,21 @@ https://www.srihash.org/
 ## Installation
 
 1. run `npm install`
-2. run `./prepare.sh`
+2. run `bash prepare.sh`
 
 ## Development
 
 ### compile wasm dev mode
 
-1. `cd ../go-pandora-pay`
-2. run `./scripts/build-wasm.sh main dev`
-3. run `./scripts/build-wasm.sh helper dev`
+1. `bash prepare.sh`
 
 ### run webpack dev server 
-3. run `npm run dev`
+2. run `npm run dev`
 
 ## Production
 
 ### compile wasm prod mode
-1. cd `./go-pandora-pay`
-2. run `./scripts/build-wasm.sh main build brotli zopfli`
-3. run `./scripts/build-wasm.sh helper build brotli zopfli`
-
-### build wallet
-1. run `npm run build`
+1. cd `bash build.sh`
 
 ## DOCS
 
