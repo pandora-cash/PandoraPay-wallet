@@ -33,14 +33,14 @@ jobs:
         rm artifact-wasm.zip
         
         mv wasm_exec.js ../../../src/webworkers/dist/wasm_exec.js
-        
-        cd ../../
-        (cd build; zip -r ../wallet-build.zip *)
 
     - name: build npm
       run: |
         npm install
-        npm run build        
+        npm run build
+
+    - name: create zip
+      run: (cd dist/build; zip -r ../wallet-build.zip *)
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
