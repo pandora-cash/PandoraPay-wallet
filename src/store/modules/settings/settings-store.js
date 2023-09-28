@@ -4,7 +4,7 @@ export default {
 
     state: {
         dark: true,
-        balanceDecryptorTableSize: 18,
+        balanceDecrypterTableSize: 18,
 
         expert: false,
     },

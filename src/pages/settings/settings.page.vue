@@ -21,13 +21,13 @@
             </a>
           </li>
 
-          <li class="nav-item" role="presentation" @click="tab='balanceDecryptor'">
-            <a :class="`nav-link mb-0 ${tab === 'balanceDecryptor' ? 'active' : ''}`">
+          <li class="nav-item" role="presentation" @click="tab='balanceDecrypter'">
+            <a :class="`nav-link mb-0 ${tab === 'balanceDecrypter' ? 'active' : ''}`">
               <div class="audience-tab-item p-2 pe-4 cursor-pointer">
-                <h6 class="text-800 fs--2 text-nowrap">Balance Decryptor</h6>
+                <h6 class="text-800 fs--2 text-nowrap">Balance Decrypter</h6>
                 <h5 class="text-800 align-middle">
                   <i class="fas fa-laptop-code"></i>
-                  Decryptor
+                  Decrypter
                 </h5>
               </div>
             </a>
@@ -63,19 +63,19 @@
             </div>
           </div>
 
-          <div :class="`tab-pane ${tab === 'balanceDecryptor' ? 'active' : ''}`">
+          <div :class="`tab-pane ${tab === 'balanceDecrypter' ? 'active' : ''}`">
             <div class="row pt-2">
               <div class="col-12 col-sm-6">
-                <label>Precomputed Table size: {{ balanceDecryptorTableSize }}
-                  <i class="fas fa-question ms-1" v-tooltip.bottom="'Balance Decryptor Precomputed Init Table'"/>
+                <label>Precomputed Table size: {{ balanceDecrypterTableSize }}
+                  <i class="fas fa-question ms-1" v-tooltip.bottom="'Balance Decrypter Precomputed Init Table'"/>
                 </label> <br/>
-                <label>Scanner Performance: {{ balanceDecryptorPerformance[balanceDecryptorTableSize] }}/s
+                <label>Scanner Performance: {{ balanceDecrypterPerformance[balanceDecrypterTableSize] }}/s
                   <i class="fas fa-question ms-1"
-                     v-tooltip.bottom="'Balance Decryptor performance using this precomputed table'"/> </label>
-                <input class="form-range" type="range" min="16" max="22" v-model="balanceDecryptorTableSize"/>
-                <small :class="`fw-semi-bold rounded-pill badge-soft-${balanceDecryptorTableSize >= 20 ? 'danger' : 'warning'} p-1`">
+                     v-tooltip.bottom="'Balance Decrypter performance using this precomputed table'"/> </label>
+                <input class="form-range" type="range" min="16" max="22" v-model="balanceDecrypterTableSize"/>
+                <small :class="`fw-semi-bold rounded-pill badge-soft-${balanceDecrypterTableSize >= 20 ? 'danger' : 'warning'} p-1`">
                   <i class="fas fa-exclamation-triangle"/> High will require
-                  {{ $strings.formatMilliseconds(balanceDecryptorTime[balanceDecryptorTableSize] * 1000) }} initialize
+                  {{ $strings.formatMilliseconds(balanceDecrypterTime[balanceDecrypterTableSize] * 1000) }} initialize
                   (bootstrap) time.
                 </small>
               </div>
@@ -132,8 +132,8 @@ export default {
       error: "",
       status: "",
       info: "",
-      balanceDecryptorTableSize: 18,
-      tab: "balanceDecryptor",
+      balanceDecrypterTableSize: 18,
+      tab: "balanceDecrypter",
       legacyNonHardening: false,
       setupEnabled: PandoraPayWalletOptions.setup.enabled,
       setupShow: localStorage.getItem('setupSkipSetupNextTime') !== 'true',
@@ -141,7 +141,7 @@ export default {
   },
 
   computed: {
-    balanceDecryptorTime() {
+    balanceDecrypterTime() {
       return {
         16: 8,
         17: 12,
@@ -152,7 +152,7 @@ export default {
         22: 600,
       }
     },
-    balanceDecryptorPerformance() {
+    balanceDecrypterPerformance() {
       return {
         16: 125,
         17: 250,
@@ -177,10 +177,10 @@ export default {
           this.status = "Setup changed table stored"
         }
 
-      }else if (this.tab === 'balanceDecryptor'){
+      }else if (this.tab === 'balanceDecrypter'){
 
-        this.$store.commit('setBalanceDecryptorTableSize', this.balanceDecryptorTableSize)
-        this.status = "Balance Decryptor table stored"
+        this.$store.commit('setBalanceDecrypterTableSize', this.balanceDecrypterTableSize)
+        this.status = "Balance Decrypter table stored"
 
       }else if (this.tab === 'expert'){
 
@@ -196,7 +196,7 @@ export default {
   },
 
   mounted() {
-    this.balanceDecryptorTableSize = this.$store.state.settings.balanceDecryptorTableSize
+    this.balanceDecrypterTableSize = this.$store.state.settings.balanceDecrypterTableSize
   }
 
 }

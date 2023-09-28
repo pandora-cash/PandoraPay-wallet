@@ -11,14 +11,14 @@ export default {
 
     },
 
-    setBalanceDecryptorTableSize(state, value){
-        state.balanceDecryptorTableSize = Number.parseInt(value)
-        localStorage.setItem('balanceDecryptorTableSize', value );
+    setBalanceDecrypterTableSize(state, value){
+        state.balanceDecrypterTableSize = Number.parseInt(value)
+        localStorage.setItem('balanceDecrypterTableSize', value );
     },
 
     readLocalStorage(state){
         state.dark = ( localStorage.getItem('dark') || 'false' ) === 'true'
-        state.balanceDecryptorTableSize = Number.parseInt( localStorage.getItem('balanceDecryptorTableSize') || '18' )
+        state.balanceDecrypterTableSize = Number.parseInt( localStorage.getItem('balanceDecrypterTableSize') || '18' )
         state.expert = ( localStorage.getItem('expert') || 'false' ) === 'true'
     },
 
