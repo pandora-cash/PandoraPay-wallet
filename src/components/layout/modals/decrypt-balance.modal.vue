@@ -103,12 +103,12 @@ export default {
       await PandoraPayHelperPromise
       this.status = ""
 
-      PandoraPayHelper.balanceDecoderCallback = (status) => {
+      PandoraPayHelper.balanceDecrypterCallback = (status) => {
         this.status = "Init  " + status
         this.statusTitle = "Initialize library " + status
       }
 
-      await PandoraPayHelper.decoderPromise
+      await PandoraPayHelper.decrypterPromise
       this.status = ""
       this.statusTitle = ""
 

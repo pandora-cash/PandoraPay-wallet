@@ -118,10 +118,10 @@ export default {
                   console.log("Helper status:", status)
                 }, async () => {
 
-                  let promiseDecoderResolve, promiseDecoderReject
-                  global.PandoraPayHelper.decoderPromise = new Promise((resolve, reject) => {
-                    promiseDecoderResolve = resolve
-                    promiseDecoderReject = reject
+                  let promiseDecrypterResolve, promiseDecrypterReject
+                  global.PandoraPayHelper.decrpyterPromise = new Promise((resolve, reject) => {
+                    promiseDecrypterResolve = resolve
+                    promiseDecrypterReject = reject
                   })
 
                   await PandoraPayHelper.helloPandoraHelper()
@@ -132,12 +132,12 @@ export default {
                   const balanceDecrypterTableSize = Number.parseInt(localStorage.getItem('balanceDecrypterTableSize') || '18');
 
                   const promise = PandoraPayHelper.wallet.initializeBalanceDecrypter(MyTextEncode(JSONStringify({tableSize: 1 << balanceDecrypterTableSize})), status => {
-                    if (PandoraPayHelper.balanceDecoderCallback) PandoraPayHelper.balanceDecoderCallback(status)
+                    if (PandoraPayHelper.balanceDecrpyterCallback) PandoraPayHelper.balanceDecrypterCallback(status)
                   })
 
                   promise
-                      .then(answ => promiseDecoderResolve(answ))
-                      .catch(err => promiseDecoderReject(err))
+                      .then(answ => promiseDecrypterResolve(answ))
+                      .catch(err => promiseDecrypterReject(err))
 
                   await promise
                 })
